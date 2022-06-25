@@ -2,9 +2,14 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten"
+	"github.com/theonlymoby/cacki/asset"
 )
 
 type Game struct{}
+
+func init() {
+	asset.LoadStaticImages()
+}
 
 func (g *Game) Layout(w, h int) (int, int) {
 	s := ebiten.DeviceScaleFactor()
@@ -20,4 +25,5 @@ func (g *Game) Update() error {
 }
 
 func main() {
+	ebiten.RunGame(&Game{})
 }

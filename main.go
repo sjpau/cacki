@@ -11,8 +11,10 @@ type Game struct {
 	baskets       component.Baskets
 	patience      *component.Patience
 	stamina       *component.Stamina
+	toys          Toys
 	PatienceLevel int
 	StaminaLevel  int
+	count         uint64
 }
 
 func (g *Game) Layout(w, h int) (int, int) {
@@ -26,16 +28,22 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	g.baskets.DrawOn(screen)
 	g.stamina.DrawOn(screen)
 	g.patience.DrawOn(screen)
+	g.toys.DrawOn(screen)
 }
 
 func (g *Game) Update() error {
 	g.InitObjects()
 	ebiten.SetFullscreen(true)
 	g.player.Update()
+	for i := 0; i < g.toys.Spawn; i++ {
+		g.baskets.Update(g.toys.CachedToys[i])
+	}
 	g.kid.Update()
-	g.baskets.Update()
+	g.toys.Update(g)
 	g.patience.Update(1)
 	g.stamina.Update(1)
+	g.EventDropToy()
+	g.count++
 	return nil
 }
 

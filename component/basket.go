@@ -43,4 +43,14 @@ func (b *Baskets) DrawOn(screen *ebiten.Image) {
 	b.ToyBaskets[2].DrawOn(screen, TypePlush)
 }
 
-func (b *Baskets) Update() {}
+func (b *Baskets) Update(t *Toy) {
+	for i := 0; i < 3; i++ {
+		if b.ToyBaskets[i].O.CollideWith(&t.O) {
+			if b.ToyBaskets[i].Type == t.Type {
+				// plus point
+			} else {
+				//minus point
+			}
+		}
+	}
+}

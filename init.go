@@ -75,6 +75,25 @@ func (g *Game) InitObjects() {
 			}
 		}
 	}
+
+	if g.toys.CachedToys == nil {
+		g.toys.InitToysImages()
+		g.toys.CachedToys = make([]*component.Toy, maxToys)
+		g.toys.Spawn = 0
+		for i := range g.toys.CachedToys {
+			randType := rand.Intn(4)
+			g.toys.CachedToys[i] = &component.Toy{
+				Type: randType,
+				O: component.Object{
+					X:      g.kid.O.X,
+					Y:      g.kid.O.Y,
+					Width:  component.Unit * int(s),
+					Height: component.Unit * int(s),
+				},
+				Attached: false,
+			}
+		}
+	}
 }
 
 func init() {

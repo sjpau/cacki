@@ -37,13 +37,13 @@ func (k *Kid) DrawOn(screen *ebiten.Image) {
 func (k *Kid) MoveRandomly(d int) {
 	switch d {
 	case 1:
-		k.O.VX = -SpeedCoef
+		k.O.VX = -SpeedCoef / 1.5
 	case 2:
-		k.O.VX = SpeedCoef
+		k.O.VX = SpeedCoef / 1.5
 	case 3:
-		k.O.VY = SpeedCoef
+		k.O.VY = SpeedCoef / 1.5
 	case 4:
-		k.O.VY = -SpeedCoef
+		k.O.VY = -SpeedCoef / 1.5
 	}
 }
 

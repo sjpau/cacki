@@ -2,13 +2,11 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten"
-	"github.com/theonlymoby/cacki/asset"
+	"github.com/theonlymoby/cacki/component"
 )
 
-type Game struct{}
-
-func init() {
-	asset.LoadStaticImages()
+type Game struct {
+	player *component.Player
 }
 
 func (g *Game) Layout(w, h int) (int, int) {
@@ -17,10 +15,13 @@ func (g *Game) Layout(w, h int) (int, int) {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-
+	g.player.DrawOn(screen)
 }
 
 func (g *Game) Update() error {
+	g.InitObjects()
+	ebiten.SetFullscreen(true)
+	g.player.Update()
 	return nil
 }
 

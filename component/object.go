@@ -1,4 +1,4 @@
-package entity
+package component
 
 type Object struct {
 	X      float64
@@ -9,6 +9,10 @@ type Object struct {
 	Height int
 }
 
+const (
+	SpeedCoef = 100
+)
+
 func (o *Object) CollideWith(n *Object) bool {
 	if o.X+float64(o.Width) >= n.X &&
 		o.X <= n.X+float64(n.Width) &&
@@ -17,4 +21,9 @@ func (o *Object) CollideWith(n *Object) bool {
 		return true
 	}
 	return false
+}
+
+func (o *Object) Update() {
+	o.X += o.VX
+	o.Y += o.VY
 }

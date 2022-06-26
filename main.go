@@ -6,7 +6,12 @@ import (
 )
 
 type Game struct {
-	player *component.Player
+	player        *component.Player
+	baskets       component.Baskets
+	patience      *component.Patience
+	stamina       *component.Stamina
+	PatienceLevel int
+	StaminaLevel  int
 }
 
 func (g *Game) Layout(w, h int) (int, int) {
@@ -16,12 +21,18 @@ func (g *Game) Layout(w, h int) (int, int) {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	g.player.DrawOn(screen)
+	g.baskets.DrawOn(screen)
+	g.stamina.DrawOn(screen)
+	g.patience.DrawOn(screen)
 }
 
 func (g *Game) Update() error {
 	g.InitObjects()
 	ebiten.SetFullscreen(true)
 	g.player.Update()
+	g.baskets.Update()
+	g.patience.Update(1)
+	g.stamina.Update(1)
 	return nil
 }
 

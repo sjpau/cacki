@@ -1,8 +1,6 @@
 package component
 
 import (
-	"fmt"
-
 	"github.com/hajimehoshi/ebiten"
 	"github.com/theonlymoby/cacki/asset"
 )
@@ -16,7 +14,7 @@ func (p *Player) DrawOn(screen *ebiten.Image) {
 	if p.Image != nil {
 		s := ebiten.DeviceScaleFactor()
 		o := &ebiten.DrawImageOptions{}
-		o.GeoM.Scale(4*s, 4*s)
+		o.GeoM.Scale(3*s, 3*s)
 		o.Filter = ebiten.FilterLinear
 		o.GeoM.Translate(p.O.X/Unit, p.O.Y/Unit)
 		screen.DrawImage(p.Image, o)
@@ -25,7 +23,6 @@ func (p *Player) DrawOn(screen *ebiten.Image) {
 
 func (p *Player) Update() {
 	fw, fh := ebiten.ScreenSizeInFullscreen()
-	fmt.Printf("w %d, h %d", fw, fh)
 	l, r, u, d := BindMovementKeys()
 	if l {
 		p.Image = asset.KidLeftImage
@@ -45,6 +42,23 @@ func (p *Player) Update() {
 		p.O.VX = 0
 		p.O.VY = 0
 	}
+
+	/*WTF?!?!?!?!?!*/
+	if p.O.X > float64(fw*(Unit-1)) {
+		p.O.VX = 0
+		p.O.X -= 100
+	} else if p.O.X < 0 {
+		p.O.VX = 0
+		p.O.X += 100
+	}
+	if p.O.Y > float64(fh*(Unit-1)) {
+		p.O.VY = 0
+		p.O.Y -= 100
+	} else if p.O.Y < 0 {
+		p.O.VY = 0
+		p.O.Y += 100
+	}
+
 	p.O.Update()
 	p.O.VX = 0
 	p.O.VY = 0

@@ -11,14 +11,11 @@ type Player struct {
 }
 
 func (p *Player) DrawOn(screen *ebiten.Image) {
-	if p.Image != nil {
-		s := ebiten.DeviceScaleFactor()
-		o := &ebiten.DrawImageOptions{}
-		o.GeoM.Scale(3*s, 3*s)
-		//		o.Filter = ebiten.FilterLinear
-		o.GeoM.Translate(p.O.X/Unit, p.O.Y/Unit)
-		screen.DrawImage(p.Image, o)
-	}
+	s := ebiten.DeviceScaleFactor()
+	o := &ebiten.DrawImageOptions{}
+	o.GeoM.Scale(3*s, 3*s)
+	o.GeoM.Translate(p.O.X/Unit, p.O.Y/Unit)
+	screen.DrawImage(p.Image, o)
 }
 
 func (p *Player) Update() {

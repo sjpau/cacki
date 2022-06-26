@@ -10,17 +10,32 @@ import (
 )
 
 func (g *Game) InitObjects() {
+	s := ebiten.DeviceScaleFactor()
 	fw, fh := ebiten.ScreenSizeInFullscreen()
 	if g.player == nil {
 		g.player = &component.Player{
 			Image: asset.KidStillImage,
 			O: component.Object{
-				X:      float64(fw) / component.Unit,
-				Y:      float64(fh) / component.Unit,
+				X:      float64(fw) * (component.Unit - 1) / 2,
+				Y:      float64(fh) * (component.Unit - 1) / 2,
 				VX:     0,
 				VY:     0,
-				Width:  component.Unit * int(ebiten.DeviceScaleFactor()),
-				Height: component.Unit * int(ebiten.DeviceScaleFactor()),
+				Width:  component.Unit * int(s),
+				Height: component.Unit * int(s),
+			},
+		}
+	}
+
+	if g.kid == nil {
+		g.kid = &component.Kid{
+			Image: asset.KidStillImage,
+			O: component.Object{
+				X:      float64(fw)*(component.Unit-1)/2 + float64(rand.Intn(100)-rand.Intn(100)*component.Unit*rand.Intn(5)),
+				Y:      float64(fh)*(component.Unit-1)/2 + float64(rand.Intn(100)-rand.Intn(100)*component.Unit*rand.Intn(5)),
+				VX:     0,
+				VY:     0,
+				Width:  component.Unit * int(s),
+				Height: component.Unit * int(s),
 			},
 		}
 	}
@@ -30,8 +45,8 @@ func (g *Game) InitObjects() {
 			O: component.Object{
 				X:      float64(fw) / component.Unit,
 				Y:      float64(fh) / component.Unit,
-				Width:  component.Unit * int(ebiten.DeviceScaleFactor()),
-				Height: component.Unit * int(ebiten.DeviceScaleFactor()),
+				Width:  component.Unit * int(s),
+				Height: component.Unit * int(s),
 			},
 		}
 	}
@@ -41,8 +56,8 @@ func (g *Game) InitObjects() {
 			O: component.Object{
 				X:      float64(fw) * (component.Unit - 1),
 				Y:      float64(fh) / component.Unit,
-				Width:  component.Unit * int(ebiten.DeviceScaleFactor()),
-				Height: component.Unit * int(ebiten.DeviceScaleFactor()),
+				Width:  component.Unit * int(s),
+				Height: component.Unit * int(s),
 			},
 		}
 	}
@@ -52,10 +67,10 @@ func (g *Game) InitObjects() {
 		for i := range g.baskets.ToyBaskets {
 			g.baskets.ToyBaskets[i] = &component.Basket{
 				O: component.Object{
-					X:      float64(fw*(component.Unit-1)/2) + float64(6*i*component.Unit*component.Unit),
+					X:      float64(fw*(component.Unit-1)/2) + float64(6*i*component.Unit*component.Unit) - component.Unit*component.Unit*8,
 					Y:      0 + 1*(component.Unit-1),
-					Width:  component.Unit * int(ebiten.DeviceScaleFactor()),
-					Height: component.Unit * int(ebiten.DeviceScaleFactor()),
+					Width:  component.Unit * int(s),
+					Height: component.Unit * int(s),
 				},
 			}
 		}

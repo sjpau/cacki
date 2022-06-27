@@ -50,9 +50,13 @@ func (b *Baskets) Update(t *Toy) {
 	for i := 0; i < 3; i++ {
 		if b.ToyBaskets[i].O.CollideWith(&t.O) {
 			if b.ToyBaskets[i].Type == t.Type {
+				asset.RightBasket.Rewind()
+				asset.RightBasket.Play()
 				b.PlusPoint += 1
 			} else {
 				b.MinusPoint += 1
+				asset.WrongBasket.Rewind()
+				asset.WrongBasket.Play()
 			}
 			t.Dispose()
 		}

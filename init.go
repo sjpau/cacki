@@ -112,4 +112,5 @@ func (g *Game) InitObjects() {
 func init() {
 	rand.Seed(time.Now().UnixNano())
 	asset.LoadStaticImages()
+	asset.LoadAudio()
 }

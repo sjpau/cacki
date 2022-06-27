@@ -6,6 +6,8 @@ import (
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/audio"
+	"github.com/hajimehoshi/ebiten/audio/wav"
 )
 
 var (
@@ -43,6 +45,46 @@ var (
 	WonImage         *ebiten.Image
 	LossImage        *ebiten.Image
 )
+
+var (
+	AudioContext *audio.Context
+	PickWav      *audio.Player
+	RightBasket  *audio.Player
+	WrongBasket  *audio.Player
+)
+
+const (
+	SampleRate = 48000
+)
+
+func LoadAudio() {
+	AudioContext = audio.NewContext(SampleRate)
+
+	temp, err := wav.DecodeWithSampleRate(SampleRate, bytes.NewReader(pickup_wav))
+	if err != nil {
+		panic(err)
+	}
+	PickWav, err = AudioContext.NewPlayer(temp)
+	if err != nil {
+		panic(err)
+	}
+	temp, err = wav.DecodeWithSampleRate(SampleRate, bytes.NewReader(wrongbasket_wav))
+	if err != nil {
+		panic(err)
+	}
+	WrongBasket, err = AudioContext.NewPlayer(temp)
+	if err != nil {
+		panic(err)
+	}
+	temp, err = wav.DecodeWithSampleRate(SampleRate, bytes.NewReader(rightbasket_wav))
+	if err != nil {
+		panic(err)
+	}
+	RightBasket, err = AudioContext.NewPlayer(temp)
+	if err != nil {
+		panic(err)
+	}
+}
 
 func LoadImageFromBytes(b []byte) *ebiten.Image {
 	img, _, err := image.Decode(bytes.NewReader(b))

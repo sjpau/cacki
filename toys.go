@@ -40,19 +40,22 @@ func (t *Toys) InitToysImages() {
 }
 
 func (t *Toys) DrawOn(screen *ebiten.Image) {
-	randImage := rand.Intn(4)
 	for i := 0; i < t.Spawn; i++ {
-		switch t.CachedToys[i].Type {
-		case 1:
-			t.CachedToys[i].Image = t.CarsImages[randImage]
-		case 2:
-			t.CachedToys[i].Image = t.FoodImages[randImage]
-		case 3:
-			t.CachedToys[i].Image = t.PlushImages[randImage]
-		}
 		if t.CachedToys[i].Image != nil {
 			t.CachedToys[i].DrawOn(screen)
 		}
+	}
+}
+
+func (toys *Toys) TypeToImage(t *component.Toy) {
+	randImage := rand.Intn(4)
+	switch t.Type {
+	case 1:
+		t.Image = toys.CarsImages[randImage]
+	case 2:
+		t.Image = toys.FoodImages[randImage]
+	case 3:
+		t.Image = toys.PlushImages[randImage]
 	}
 }
 

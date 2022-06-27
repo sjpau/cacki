@@ -94,6 +94,7 @@ func (g *Game) InitObjects() {
 				Spawned:  false,
 				Stable:   false,
 			}
+			g.toys.TypeToImage(g.toys.CachedToys[i])
 		}
 	}
 }

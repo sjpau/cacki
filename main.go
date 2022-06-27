@@ -12,9 +12,11 @@ type Game struct {
 	patience      *component.Patience
 	stamina       *component.Stamina
 	toys          Toys
-	PatienceLevel float64
-	StaminaLevel  float64
+	PatienceLevel int
+	StaminaLevel  int
 	count         uint64
+	Loss          bool
+	Win           bool
 }
 
 func (g *Game) Layout(w, h int) (int, int) {
@@ -45,9 +47,17 @@ func (g *Game) Update() error {
 	}
 	g.kid.Update()
 	g.toys.Update(g)
-	g.patience.Update(1)
-	g.stamina.Update(1)
+	g.patience.Update(g.PatienceLevel)
+	g.stamina.Update(g.StaminaLevel)
 	g.EventDropToy()
+	g.PatienceLevel = g.baskets.MinusPoint
+	g.StaminaLevel = g.baskets.PlusPoint
+	if g.StaminaLevel > 25 {
+		g.Win = true
+	}
+	if g.PatienceLevel > 25 {
+		g.Loss = true
+	}
 	g.count++
 	return nil
 }

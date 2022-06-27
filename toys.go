@@ -43,6 +43,9 @@ func (t *Toys) DrawOn(screen *ebiten.Image) {
 	for i := 0; i < t.Spawn; i++ {
 		if t.CachedToys[i].Image != nil {
 			t.CachedToys[i].DrawOn(screen)
+			t.CachedToys[i].O.Width, t.CachedToys[i].O.Height = t.CachedToys[i].Image.Size()
+			t.CachedToys[i].O.Width *= 20 * int(ebiten.DeviceScaleFactor())
+			t.CachedToys[i].O.Height *= 20 * int(ebiten.DeviceScaleFactor())
 		}
 	}
 }

@@ -26,3 +26,11 @@ func (t *Toy) Update() {
 		t.O.VY = 0
 	}
 }
+
+func (t *Toy) Dispose() {
+	t.Attached = false
+	t.Spawned = true
+	t.Stable = true
+	t.O.X = -3000
+	t.O.Y = -3000
+}

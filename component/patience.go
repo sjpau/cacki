@@ -17,17 +17,17 @@ func (p *Patience) DrawOn(screen *ebiten.Image) {
 	o.GeoM.Scale(3*s, 3*s)
 	o.GeoM.Translate(p.O.X/Unit, p.O.Y/Unit)
 	switch p.Level {
-	case 1:
+	case 0:
 		p.Image = asset.PatienceImage1
-	case 2:
-		p.Image = asset.PatienceImage2
-	case 3:
-		p.Image = asset.PatienceImage3
-	case 4:
-		p.Image = asset.PatienceImage4
 	case 5:
+		p.Image = asset.PatienceImage2
+	case 10:
+		p.Image = asset.PatienceImage3
+	case 15:
+		p.Image = asset.PatienceImage4
+	case 20:
 		p.Image = asset.PatienceImage5
-	case 6:
+	case 25:
 		p.Image = asset.PatienceImage6
 	}
 	screen.DrawImage(p.Image, o)

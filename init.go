@@ -13,6 +13,10 @@ func (g *Game) InitObjects() {
 	s := ebiten.DeviceScaleFactor()
 	fw, fh := ebiten.ScreenSizeInFullscreen()
 	if g.player == nil {
+		g.Loss = false
+		g.Win = false
+		g.PatienceLevel = 0
+		g.StaminaLevel = 0
 		g.player = &component.Player{
 			Image: asset.KidStillImage,
 			O: component.Object{
@@ -83,7 +87,7 @@ func (g *Game) InitObjects() {
 		g.toys.CachedToys = make([]*component.Toy, maxToys)
 		g.toys.Spawn = 0
 		for i := range g.toys.CachedToys {
-			randType := rand.Intn(4)
+			randType := rand.Intn(4-1) + 1
 			g.toys.CachedToys[i] = &component.Toy{
 				Type: randType,
 				O: component.Object{
@@ -98,7 +102,6 @@ func (g *Game) InitObjects() {
 			}
 			g.toys.TypeToImage(g.toys.CachedToys[i])
 		}
-
 	}
 }
 

@@ -17,17 +17,17 @@ func (st *Stamina) DrawOn(screen *ebiten.Image) {
 	o.GeoM.Scale(3*s, 3*s)
 	o.GeoM.Translate(st.O.X/Unit, st.O.Y/Unit)
 	switch st.Level {
-	case 1:
+	case 0:
 		st.Image = asset.StaminaImage1
-	case 2:
-		st.Image = asset.StaminaImage2
-	case 3:
-		st.Image = asset.StaminaImage3
-	case 4:
-		st.Image = asset.StaminaImage4
 	case 5:
+		st.Image = asset.StaminaImage2
+	case 10:
+		st.Image = asset.StaminaImage3
+	case 15:
+		st.Image = asset.StaminaImage4
+	case 20:
 		st.Image = asset.StaminaImage5
-	case 6:
+	case 25:
 		st.Image = asset.StaminaImage6
 	}
 	screen.DrawImage(st.Image, o)

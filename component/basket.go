@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	TypeCars = iota
+	TypeCars = iota + 1
 	TypeFood
 	TypePlush
 )
@@ -19,6 +19,8 @@ type Basket struct {
 
 type Baskets struct {
 	ToyBaskets []*Basket
+	PlusPoint  int
+	MinusPoint int
 }
 
 func (b *Basket) DrawOn(screen *ebiten.Image, t int) {
@@ -26,6 +28,7 @@ func (b *Basket) DrawOn(screen *ebiten.Image, t int) {
 	o := &ebiten.DrawImageOptions{}
 	o.GeoM.Scale(3*s, 3*s)
 	o.GeoM.Translate(b.O.X/Unit, b.O.Y/Unit)
+	b.Type = t
 	switch t {
 	case TypeCars:
 		b.Image = asset.BasketcarsImage
@@ -47,10 +50,11 @@ func (b *Baskets) Update(t *Toy) {
 	for i := 0; i < 3; i++ {
 		if b.ToyBaskets[i].O.CollideWith(&t.O) {
 			if b.ToyBaskets[i].Type == t.Type {
-				// plus point
+				b.PlusPoint += 1
 			} else {
-				//minus point
+				b.MinusPoint += 1
 			}
+			t.Dispose()
 		}
 	}
 }

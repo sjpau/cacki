@@ -38,6 +38,15 @@ func (g *Game) Update() error {
 	for i := 0; i < g.toys.Spawn; i++ {
 		g.baskets.Update(g.toys.CachedToys[i])
 	}
+	for i := 0; i < g.toys.Spawn; i++ {
+		if g.toys.CachedToys[i].Spawned && g.toys.CachedToys[i].Stable == false {
+			g.toys.CachedToys[i].O.X = g.kid.O.X
+			g.toys.CachedToys[i].O.Y = g.kid.O.Y
+			g.toys.CachedToys[i].Stable = true
+		} else {
+
+		}
+	}
 	g.kid.Update()
 	g.toys.Update(g)
 	g.patience.Update(1)

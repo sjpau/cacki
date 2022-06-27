@@ -91,6 +91,8 @@ func (g *Game) InitObjects() {
 					Height: component.Unit * int(s),
 				},
 				Attached: false,
+				Spawned:  false,
+				Stable:   false,
 			}
 		}
 	}

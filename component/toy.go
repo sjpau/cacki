@@ -7,6 +7,8 @@ type Toy struct {
 	Image    *ebiten.Image
 	Type     int
 	Attached bool
+	Spawned  bool
+	Stable   bool
 }
 
 func (t *Toy) DrawOn(screen *ebiten.Image) {
@@ -15,6 +17,7 @@ func (t *Toy) DrawOn(screen *ebiten.Image) {
 	o.GeoM.Scale(3*s, 3*s)
 	o.GeoM.Translate(t.O.X/Unit, t.O.Y/Unit)
 	screen.DrawImage(t.Image, o)
+	t.Spawned = true
 }
 
 func (t *Toy) Update() {
@@ -22,5 +25,4 @@ func (t *Toy) Update() {
 		t.O.VX = 0
 		t.O.VY = 0
 	}
-
 }

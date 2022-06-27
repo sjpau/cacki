@@ -40,6 +40,8 @@ var (
 	KidRightImage    *ebiten.Image
 	KidStillImage    *ebiten.Image
 	KidUpImage       *ebiten.Image
+	WonImage         *ebiten.Image
+	LossImage        *ebiten.Image
 )
 
 func LoadImageFromBytes(b []byte) *ebiten.Image {
@@ -82,4 +84,6 @@ func LoadStaticImages() {
 	KidRightImage = LoadImageFromBytes(kidright_png)
 	KidStillImage = LoadImageFromBytes(kidstill_png)
 	KidUpImage = LoadImageFromBytes(kidup_png)
+	WonImage = LoadImageFromBytes(won_png)
+	LossImage = LoadImageFromBytes(loss_png)
 }

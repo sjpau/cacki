@@ -10,6 +10,10 @@ import (
 )
 
 func (g *Game) InitObjects() {
+	if g.LossScreen == nil || g.WonScreen == nil {
+		g.LossScreen = asset.LossImage
+		g.WonScreen = asset.WonImage
+	}
 	s := ebiten.DeviceScaleFactor()
 	fw, fh := ebiten.ScreenSizeInFullscreen()
 	if g.player == nil {

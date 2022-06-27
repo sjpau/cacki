@@ -12,8 +12,8 @@ type Game struct {
 	patience      *component.Patience
 	stamina       *component.Stamina
 	toys          Toys
-	PatienceLevel int
-	StaminaLevel  int
+	PatienceLevel float64
+	StaminaLevel  float64
 	count         uint64
 }
 
@@ -37,14 +37,10 @@ func (g *Game) Update() error {
 	g.player.Update()
 	for i := 0; i < g.toys.Spawn; i++ {
 		g.baskets.Update(g.toys.CachedToys[i])
-	}
-	for i := 0; i < g.toys.Spawn; i++ {
-		if g.toys.CachedToys[i].Spawned && g.toys.CachedToys[i].Stable == false {
+		if g.toys.CachedToys[i].Spawned && g.toys.CachedToys[i].Attached == false && g.toys.CachedToys[i].Stable == false {
 			g.toys.CachedToys[i].O.X = g.kid.O.X
 			g.toys.CachedToys[i].O.Y = g.kid.O.Y
 			g.toys.CachedToys[i].Stable = true
-		} else {
-
 		}
 	}
 	g.kid.Update()

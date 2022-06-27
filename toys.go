@@ -65,6 +65,7 @@ func (t *Toys) Update(g *Game) {
 		t.CachedToys[i].Update()
 		if t.CachedToys[i].O.CollideWith(&g.player.O) {
 			t.CachedToys[i].Attached = true
+			t.CachedToys[i].Stable = false
 		}
 		if t.CachedToys[i].Attached {
 			t.CachedToys[i].O.X = g.player.O.X

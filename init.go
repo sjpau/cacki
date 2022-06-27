@@ -16,28 +16,30 @@ func (g *Game) InitObjects() {
 		g.player = &component.Player{
 			Image: asset.KidStillImage,
 			O: component.Object{
-				X:      float64(fw) * (component.Unit - 1) / 2,
-				Y:      float64(fh) * (component.Unit - 1) / 2,
-				VX:     0,
-				VY:     0,
-				Width:  component.Unit * int(s),
-				Height: component.Unit * int(s),
+				X:  float64(fw) * (component.Unit - 1) / 2,
+				Y:  float64(fh) * (component.Unit - 1) / 2,
+				VX: 0,
+				VY: 0,
 			},
 		}
+		pw, ph := g.player.Image.Size()
+		g.player.O.Width = pw * int(s)
+		g.player.O.Height = ph * int(s)
 	}
 
 	if g.kid == nil {
 		g.kid = &component.Kid{
 			Image: asset.KidStillImage,
 			O: component.Object{
-				X:      float64(fw)*(component.Unit-1)/2 + float64(rand.Intn(100)-rand.Intn(100)*component.Unit*rand.Intn(5)),
-				Y:      float64(fh)*(component.Unit-1)/2 + float64(rand.Intn(100)-rand.Intn(100)*component.Unit*rand.Intn(5)),
-				VX:     0,
-				VY:     0,
-				Width:  component.Unit * int(s),
-				Height: component.Unit * int(s),
+				X:  float64(fw)*(component.Unit-1)/2 + float64(rand.Intn(100)-rand.Intn(100)*component.Unit*rand.Intn(5)),
+				Y:  float64(fh)*(component.Unit-1)/2 + float64(rand.Intn(100)-rand.Intn(100)*component.Unit*rand.Intn(5)),
+				VX: 0,
+				VY: 0,
 			},
 		}
+		pw, ph := g.kid.Image.Size()
+		g.kid.O.Width = pw * int(s)
+		g.kid.O.Height = ph * int(s)
 	}
 
 	if g.stamina == nil {
@@ -67,10 +69,10 @@ func (g *Game) InitObjects() {
 		for i := range g.baskets.ToyBaskets {
 			g.baskets.ToyBaskets[i] = &component.Basket{
 				O: component.Object{
-					X:      float64(fw*(component.Unit-1)/2) + float64(6*i*component.Unit*component.Unit) - component.Unit*component.Unit*8,
+					X:      float64(fw*(component.Unit-1)/2) + float64(6*(i+2)*component.Unit*component.Unit) - component.Unit*component.Unit*16,
 					Y:      0 + 1*(component.Unit-1),
-					Width:  component.Unit * int(s),
-					Height: component.Unit * int(s),
+					Width:  50 * component.Unit * int(s),
+					Height: 50 * component.Unit * int(s),
 				},
 			}
 		}
@@ -87,8 +89,8 @@ func (g *Game) InitObjects() {
 				O: component.Object{
 					X:      g.kid.O.X,
 					Y:      g.kid.O.Y,
-					Width:  component.Unit * int(s),
-					Height: component.Unit * int(s),
+					Width:  50 * component.Unit * int(s),
+					Height: 50 * component.Unit * int(s),
 				},
 				Attached: false,
 				Spawned:  false,
@@ -96,6 +98,7 @@ func (g *Game) InitObjects() {
 			}
 			g.toys.TypeToImage(g.toys.CachedToys[i])
 		}
+
 	}
 }
 

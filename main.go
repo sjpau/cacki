@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/hajimehoshi/ebiten"
-	"github.com/theonlymoby/cacki/component"
+	"github.com/sjpau/cacki/component"
 )
 
 type Mode int

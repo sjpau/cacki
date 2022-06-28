@@ -4,8 +4,8 @@ import (
 	"math/rand"
 
 	"github.com/hajimehoshi/ebiten"
-	"github.com/theonlymoby/cacki/asset"
-	"github.com/theonlymoby/cacki/component"
+	"github.com/sjpau/cacki/asset"
+	"github.com/sjpau/cacki/component"
 )
 
 const (
